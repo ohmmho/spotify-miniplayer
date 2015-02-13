@@ -1,0 +1,53 @@
+<html>
+
+<head>
+  
+  <title>Spotify MiniPlayer</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+  
+  <div class="header-page">
+    
+    <span><!-- <img src="src/images/logo.png"> --></span><span> <h3>Spotify MiniPlayer</h3></span>
+    <div class="searcher">  
+      <form>
+        <input type="search" name="search" placeholder="Search...">
+      </form>
+    </div>
+
+  </div>  
+
+
+    <div class="widget">
+      <div class="header">
+        <div class="btn-play disabled"></div>
+
+        <div class="metadata">
+          <p class="title">Song title</p>
+          <p class="author">Song author</p>
+
+          <div class="seekbar">
+            <progress value="1" max="30"></progress>
+          </div>
+        </div>
+      </div>
+      <div class="cover">
+        <img src="images/portada.jpg">
+      </div>
+
+      <audio id="audio"></audio>
+    </div>
+    <script src="application.js"></script>
+</body>
+  
+
+
+
+
+</html>
+
+

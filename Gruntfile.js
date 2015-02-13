@@ -6,11 +6,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        uglify: {
-          options: {
-            mangle: false,
-            banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-          },
 
         processhtml: {
           dist: {
@@ -22,40 +17,49 @@ module.exports = function(grunt) {
               }
             },
             files: {
-              'build/index.html': ['index.html']
+              'build/index.html': ['src/index.html']
             }
           }
         },
 
+        uglify: {
+          options: {
+            mangle: false,
+            banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+          },
           my_target: {
             files: {
               'build/application.js': ['src/javascript/*.js']
             }
           }
         },
+
         sass: {
           dist: {
             files: {
-             'build/styles.css':'src/styles/main.scss'
+             'build/styles.css':'src/styles/styles.scss'
             }
           }
         },
 
         watch: {
+
+            options: {
+                livereload: true,
+            },
             scripts: {
-                files: ['js/*.js'],
-                tasks: ['uglify'],
-                options: {
-                    spawn: false,
-                },
-            } 
+              files: ['/src/javascript/*.js'],
+              tasks: ['uglify'],
+              options: {
+                  spawn: false,
+              }
+            },
+            css: {
+                files: 'src/styles/*.scss',
+                tasks: ['sass'],
+            }
         },
-        copy: {
-          main: {
-            src: 'src/styles/*.css',
-            dest: 'build/styles.css',
-          }
-        },
+
 
         'gh-pages': {
             options: {
@@ -72,11 +76,13 @@ module.exports = function(grunt) {
       grunt.loadNpmTasks('grunt-processhtml');
       grunt.loadNpmTasks('grunt-contrib-copy');
       grunt.loadNpmTasks('grunt-gh-pages'); 
+      grunt.loadNpmTasks('grunt-contrib-watch'); 
+
 
 
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
     grunt.registerTask('deploy', ['gh-pages']);
-  grunt.registerTask('default', ['uglify', 'sass', 'copy', 'processhtml']);
+  grunt.registerTask('default', ['uglify', 'sass', 'processhtml']);
 
 };
